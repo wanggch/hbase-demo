@@ -20,15 +20,13 @@ public class CreateTableDemo {
         // DDL操作对象
         Admin admin = connection.getAdmin();
         //表名
-        TableName name = TableName.valueOf("user1");
+        TableName name = TableName.valueOf("t_real_time_data");
         HTableDescriptor desc = new HTableDescriptor(name);
         //列族
-        HColumnDescriptor base_info = new HColumnDescriptor("base_info");
-        HColumnDescriptor extra_info = new HColumnDescriptor("extra_info");
+        HColumnDescriptor family = new HColumnDescriptor("default_family");
         //最大保存的历史版本个数
-        base_info.setMaxVersions(5);
-        desc.addFamily(base_info);
-        desc.addFamily(extra_info);
+        family.setMaxVersions(5);
+        desc.addFamily(family);
         //创建表
         System.out.println("## 创建表 ##");
         admin.createTable(desc);
